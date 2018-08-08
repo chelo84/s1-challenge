@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+.input {
+	padding-top: 7px;
+}
+
+.lb-id {
+	padding-left: 7px;
+	padding-right: 7px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.input-id {
+	text-align: center;
+	margin-left: 3px;
+	width: 14px;
+}
+
+.lb-titulo {
+	padding-left: 150px;
+	padding-right: 150px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.input-titulo {
+	margin-left: 6px;
+	width: 335px;
+}
+
+.lb-author {
+	padding-left: 80px;
+	padding-right: 80px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.input-author {
+	margin-left: 6px;
+	width: 200px;
+}
+
+.lb-edition-year {
+	padding-left: 50px;
+	padding-right: 50px;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.input-edition-year {
+	margin-left: 6px;
+	width: 175px;
+}
+
+.btn-novo-livro {
+	width: 760px;
+}
+
+.btn-enviar {
+	margin-top: 5px;
+	margin-left: 350px;
+	height: 60px;
+}
+
+.btn-deletar {
+	margin-left: 3px;
+	background: red;
+	color: white;
+}

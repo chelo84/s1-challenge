@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../static/css/core.css" rel="stylesheet" type="text/css" th:href="@{/css/core.css}" />
+		<script type="text/javascript" th:src="@{/js/challenge.js}"></script>
+		<title>Serviço de ordenação</title>
+	</head>
+	<body>
+		<p>Lista</p>
+		
+		<table>
+			<tr>
+				<th class="lb-id">#</th>
+				<th class="lb-titulo">Titulo</th>
+				<th class="lb-author">Author</th>
+				<th class="lb-edition-year">Edition Year</th>
+		        <tr th:each="livro : ${livros}">
+	        </tr>
+	        <tr th:each="livro : ${livros}">
+	            <td class="lb-id" th:text="${livro.id}"></td>
+	            <td class="lb-titulo" th:text="${livro.titulo}"></td>
+	            <td class="lb-author" th:text="${livro.autor}"></td>
+	            <td class="lb-edition-year" th:text="${livro.anoEdicao}"></td>
+	        </tr>
+        </table>
+	</body>
+</html>
