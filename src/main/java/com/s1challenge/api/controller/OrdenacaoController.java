@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.s1challenge.api.exception.OrderingException;
 import com.s1challenge.api.service.Livros;
 
 @RequestMapping()
@@ -23,7 +24,7 @@ public class OrdenacaoController {
 	@RequestMapping(value="/ordenar", method=RequestMethod.POST)
     public String doOrdenar(@RequestParam("id") List<Long> ids, @RequestParam("titulo") List<String> titulos,
     						@RequestParam("autor") List<String> autores, @RequestParam("anoEdicao") List<String> anosEdicoes,
-    						Model model) {
+    						@RequestParam("ordenacao") List<String> regrasOrdenacao, Model model) {
 		
 		if(ids.isEmpty() || titulos.isEmpty() || autores.isEmpty() || anosEdicoes.isEmpty()) {
 			model.addAttribute("erro", "Não foi possivel executar a tarefa!");
@@ -31,6 +32,14 @@ public class OrdenacaoController {
 		}
 		
 		Livros livros = new Livros(ids, titulos, autores, anosEdicoes);
+		
+		try {
+			livros.ordernar(regrasOrdenacao);
+		} catch (OrderingException exc) {
+			model.addAttribute("erro", "OrderingException");
+			
+			return "servico-de-ordenacao.html";
+		}
 		
 		model.addAttribute("livros", livros.getLivros());
 		return "lista-ordenada.html";
