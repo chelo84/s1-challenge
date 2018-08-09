@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.s1challenge.api.comparator.AutorComparator;
+import com.s1challenge.api.comparator.EdicaoComparator;
 import com.s1challenge.api.comparator.LivroComparator;
 import com.s1challenge.api.comparator.TituloComparator;
 import com.s1challenge.api.exception.EmptySortingRulesException;
@@ -55,6 +56,9 @@ public class Livros {
 				
 				case "aAsc" : comparators.add(new AutorComparator(Ordem.ASCENDENTE)); break;
 				case "aDesc" : comparators.add(new AutorComparator(Ordem.DESCENDENTE)); break;	
+				
+				case "eAsc" : comparators.add(new EdicaoComparator(Ordem.ASCENDENTE)); break;
+				case "eDesc" : comparators.add(new EdicaoComparator(Ordem.DESCENDENTE)); break;				
 				}
 				
 				Collections.sort(livros, new LivroComparator(comparators));
