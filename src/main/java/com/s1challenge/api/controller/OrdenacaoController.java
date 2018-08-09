@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.s1challenge.api.exception.EmptySortingRulesException;
 import com.s1challenge.api.exception.OrderingException;
 import com.s1challenge.api.service.Livros;
 
@@ -39,6 +40,8 @@ public class OrdenacaoController {
 			model.addAttribute("erro", "OrderingException");
 			
 			return "servico-de-ordenacao.html";
+		} catch (EmptySortingRulesException exc) {
+			return "lista-ordenada.html";
 		}
 		
 		model.addAttribute("livros", livros.getLivros());

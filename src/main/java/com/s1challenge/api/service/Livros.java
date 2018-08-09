@@ -2,9 +2,15 @@ package com.s1challenge.api.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import com.s1challenge.api.comparator.TituloComparator;
+import com.s1challenge.api.comparator.AutorAscComparator;
+import com.s1challenge.api.comparator.AutorDescComparator;
+import com.s1challenge.api.comparator.LivroComparator;
+import com.s1challenge.api.comparator.TituloAscComparator;
+import com.s1challenge.api.comparator.TituloDescComparator;
+import com.s1challenge.api.exception.EmptySortingRulesException;
 import com.s1challenge.api.exception.OrderingException;
 import com.s1challenge.api.model.Livro;
 
@@ -34,16 +40,27 @@ public class Livros {
 		return this.livros;
 	}
 	
-	public void ordernar(List<String> regrasOrdenacao) throws OrderingException {
+	public void ordernar(List<String> regrasOrdenacao) throws OrderingException, EmptySortingRulesException {
+		int vazios = 0;
+		List<Comparator<Livro>> comparators = new ArrayList<>();
 		for(String regra : regrasOrdenacao) {
 			if(regra == null) {
 				throw new OrderingException();
 			}else {
 				switch(regra) {
-				case "tAsc" : Collections.sort(livros, new TituloComparator()); break;
-				case "tDesc" : Collections.sort(livros, new TituloComparator().reversed()); break;
+				case "vazio" : vazios++; break;
+				case "tAsc" : comparators.add(new TituloAscComparator()); break;
+				case "tDesc" : comparators.add(new TituloDescComparator()); break;
+				case "aAsc" : comparators.add(new AutorAscComparator()); break;
+				case "aDesc" : comparators.add(new AutorDescComparator()); break;				
 				}
+				
+				Collections.sort(livros, new LivroComparator(comparators));
 			}
+		}
+		
+		if(vazios >= 3) {
+			throw new EmptySortingRulesException();
 		}
 	}
 }
