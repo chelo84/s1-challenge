@@ -5,14 +5,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.s1challenge.api.comparator.AutorAscComparator;
-import com.s1challenge.api.comparator.AutorDescComparator;
+import com.s1challenge.api.comparator.AutorComparator;
 import com.s1challenge.api.comparator.LivroComparator;
-import com.s1challenge.api.comparator.TituloAscComparator;
-import com.s1challenge.api.comparator.TituloDescComparator;
+import com.s1challenge.api.comparator.TituloComparator;
 import com.s1challenge.api.exception.EmptySortingRulesException;
 import com.s1challenge.api.exception.OrderingException;
 import com.s1challenge.api.model.Livro;
+import com.s1challenge.api.model.Ordem;
 
 public class Livros {
 	List<Livro> livros;
@@ -46,13 +45,16 @@ public class Livros {
 		for(String regra : regrasOrdenacao) {
 			if(regra == null) {
 				throw new OrderingException();
+				
 			}else {
 				switch(regra) {
 				case "vazio" : vazios++; break;
-				case "tAsc" : comparators.add(new TituloAscComparator()); break;
-				case "tDesc" : comparators.add(new TituloDescComparator()); break;
-				case "aAsc" : comparators.add(new AutorAscComparator()); break;
-				case "aDesc" : comparators.add(new AutorDescComparator()); break;				
+				
+				case "tAsc" : comparators.add(new TituloComparator(Ordem.ASCENDENTE)); break;
+				case "tDesc" : comparators.add(new TituloComparator(Ordem.DESCENDENTE)); break;
+				
+				case "aAsc" : comparators.add(new AutorComparator(Ordem.ASCENDENTE)); break;
+				case "aDesc" : comparators.add(new AutorComparator(Ordem.DESCENDENTE)); break;	
 				}
 				
 				Collections.sort(livros, new LivroComparator(comparators));
